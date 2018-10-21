@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => res.send('Hello World!'));
 app.use(userRoutes);
 
-mongoose.connect('mongodb://localhost/cafe', { useNewUrlParser: true });
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 
 const db = mongoose.connection;
