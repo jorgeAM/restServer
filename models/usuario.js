@@ -9,7 +9,7 @@ const usuarioSchema = new Schema({
   email: {
     type: String,
     required: [true, 'El correo es necesario'],
-    unique: true,
+    unique: [true, 'Correo ya esta en uso'],
     trim: true,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
   },
