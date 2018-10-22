@@ -6,13 +6,13 @@ const mongoose = require('mongoose');
 const app = express();
 
 /*RUTAS*/
-const userRoutes = require('./routes/usuario');
+const routes = require('./routes');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello World!'));
-app.use(userRoutes);
+app.use(routes);
 
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
