@@ -17,6 +17,7 @@ app.post('/login', async (req, res) => {
     if (check) {
       let payload = {
         role: usuario.role,
+        google: usuario.google,
         estado: usuario.estado,
         sub: usuario._id,
         nombre: usuario.nombre,
