@@ -18,7 +18,11 @@ const usuarioSchema = new Schema({
     required: [true, 'La contraseña es necesaria'],
     trim: true,
   },
-  avatar: String,
+  avatar: {
+    type: String,
+    required: false,
+    default: null,
+  },
   role: {
     type: String,
     required: true,

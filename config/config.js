@@ -16,3 +16,7 @@ if (process.env.NODE_ENV === 'dev') url = 'mongodb://localhost/cafe';
 else url = process.env.MONGO_URI;
 
 process.env.URLDB = url;
+
+/*GOOGLE CLIENT ID*/
+let aux = '878808830417-ou5355t40jktnshpi87n567o3vjer359.apps.googleusercontent.com';
+process.env.CLIENT_ID = process.env.CLIENT_ID || aux;

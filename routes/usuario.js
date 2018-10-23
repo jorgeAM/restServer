@@ -6,7 +6,7 @@ const isAuthenticate = require('../middlewares/authentication');
 const app = express.Router();
 
 app.get('/usuarios', isAuthenticate, (req, res) => {
-  Usuario.find({}, 'nombre email role estado', (err, usuarios) => {
+  Usuario.find({}, 'nombre email role estado google avatar', (err, usuarios) => {
     if (err) return res.status(400).json(err);
     res.status(200).json({ usuarios });
   });
