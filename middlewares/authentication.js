@@ -11,6 +11,7 @@ const isAuthenticate = (req, res, next) => {
   try {
     let payload = jwt.verify(token, process.env.SEED);
     if (moment().unix() > payload.exp) {
+      console.log('token extendido');
       return res.status(401).json({ message: `Token ha expirado` });
     }
 
