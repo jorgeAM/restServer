@@ -43,7 +43,7 @@ app.put('/categoria/:id', isAuthenticate, async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    const categoria = await Categoria.findOneAndUpdate(id, body, { new: true });
+    const categoria = await Categoria.findByIdAndUpdate(id, body, { new: true });
     if (!categoria) return res.status(404).json({
       message: `Categoria con id ${id} no encontrado`,
     });
@@ -56,7 +56,7 @@ app.put('/categoria/:id', isAuthenticate, async (req, res) => {
 app.delete('/categoria/:id', isAuthenticate, async (req, res) => {
   try {
     const { id } = req.params;
-    const categoria = await Categoria.findOneAndDelete(id);
+    const categoria = await Categoria.findByIdAndDelete(id);
     if (!categoria) return res.status(404).json({
       message: `Categoria con id ${id} no encontrado`,
     });
