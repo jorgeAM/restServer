@@ -41,9 +41,9 @@ app.post('/upload/:tipo/:id', isAuthenticate, async (req, res) => {
 });
 
 const deleteImage = (tipo, fileName) => {
-  let path = path.resolve(__dirname, `../uploads/${tipo}/${fileName}`);
-  if (fs.existsSync(path)) {
-    fs.unlinkSync(path);
+  let ruta = path.resolve(__dirname, `../uploads/${tipo}/${fileName}`);
+  if (fs.existsSync(ruta)) {
+    fs.unlinkSync(ruta);
   }
 };
 
