@@ -29,7 +29,8 @@ app.post('/upload/:tipo/:id', isAuthenticate, async (req, res) => {
       if (err) return res.status(400).json({ err });
       else {
         /*DB*/
-        uploadImageUser(tipo, id, nombreArchivo, res);
+        if (tipo === 'usuarios') uploadImageUser(tipo, id, nombreArchivo, res);
+        else uploadImageProduct(tipo, id, nombreArchivo, res);
         /*DB*/
       }
     });
@@ -66,6 +67,32 @@ const uploadImageUser = (tipo, id, nombreArchivo, res) => {
       return res.status(200).json({
         message: 'Imagen subida con exito',
         usuario: user,
+      });
+    });
+  });
+};
+
+const uploadImageProduct = (tipo, id, nombreArchivo, res) => {
+  Producto.findById(id, (err, producto) => {
+    if (err) {
+      deleteImage(tipo, nombreArchivo);
+      return res.status(500).json({ err });
+    }
+    /*SI PRODUCTO NO EXISTE SE BORRA FOTO */
+    if (!producto) {
+      deleteImage(tipo, nombreArchivo);
+      return res.status(404).json({ message: 'producto no existe' });
+    }
+    /*PRODUCTO EXISTE SE INTENTA BORRAR FOTO ANTERIOR*/
+    if (producto.img) deleteImage(tipo, producto.img);
+    /*SE ASIGNA NUEVA FOTO*/
+    producto.img = nombreArchivo;
+    producto.save((err, product) => {
+      if (err) return res.status(500).json({ err });
+
+      return res.status(200).json({
+        message: 'Imagen subida con exito',
+        producto: product,
       });
     });
   });
