@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const moment = require('moment');
 const express = require('express');
 const fileUpload = require('express-fileupload');
@@ -25,7 +26,7 @@ app.post('/upload/:tipo/:id', isAuthenticate, async (req, res) => {
   if (image.mimetype === 'image/png' || image.mimetype === 'image/jpeg') {
     let extension = image.name.split('.')[1];
     let nombreArchivo = `${moment().unix()}.${extension}`;
-    image.mv(`./uploads/${tipo}/${nombreArchivo}`, (err) => {
+    image.mv(`/uploads/${tipo}/${nombreArchivo}`, (err) => {
       if (err) return res.status(400).json({ err });
       else {
         /*DB*/
@@ -40,7 +41,7 @@ app.post('/upload/:tipo/:id', isAuthenticate, async (req, res) => {
 });
 
 const deleteImage = (tipo, fileName) => {
-  let path = `./uploads/${tipo}/${fileName}`;
+  let path = path.resolve(__dirname, `../uploads/${tipo}/${fileName}`);
   if (fs.existsSync(path)) {
     fs.unlinkSync(path);
   }
