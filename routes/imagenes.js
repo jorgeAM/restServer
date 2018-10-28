@@ -7,7 +7,7 @@ const app = express.Router();
 
 app.get('/:tipo/:img', (req, res) => {
   const { tipo, img } = req.params;
-  const ruta = path.resolve(__dirname, `../uploads/${tipo}/${fileName}`);
+  const ruta = path.resolve(__dirname, `../uploads/${tipo}/${img}`);
   fs.stat(ruta, (err, stats) => {
     if (err) res.status(500).send({ err });
     res.sendFile(path.resolve(ruta));
