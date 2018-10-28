@@ -26,7 +26,8 @@ app.post('/upload/:tipo/:id', isAuthenticate, async (req, res) => {
   if (image.mimetype === 'image/png' || image.mimetype === 'image/jpeg') {
     let extension = image.name.split('.')[1];
     let nombreArchivo = `${moment().unix()}.${extension}`;
-    image.mv(`/uploads/${tipo}/${nombreArchivo}`, (err) => {
+    let ruta = path.resolve(__dirname, `../uploads/${tipo}/${fileName}`);
+    image.mv(ruta, (err) => {
       if (err) return res.status(400).json({ err });
       else {
         /*DB*/
